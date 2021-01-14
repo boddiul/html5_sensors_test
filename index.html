@@ -56,6 +56,10 @@
 
 <script>
 
+    posX = 0
+    posY = 0
+    posZ = 0
+
     function handleOrientation(event) {
         updateFieldIfNotNull('Orientation_a', event.alpha);
         updateFieldIfNotNull('Orientation_b', event.beta);
@@ -83,11 +87,18 @@
         updateFieldIfNotNull('Accelerometer_y', event.acceleration.y);
         updateFieldIfNotNull('Accelerometer_z', event.acceleration.z);
 
+
+
+        posX +=event.acceleration.x;
+        posY +=event.acceleration.y;
+        posZ +=event.acceleration.z;
+
+
         updateFieldIfNotNull('Accelerometer_i', event.interval, 2);
 
-        updateFieldIfNotNull('Accelerometer_xx', event.acceleration.x*100);
-        updateFieldIfNotNull('Accelerometer_yy', event.acceleration.y*100);
-        updateFieldIfNotNull('Accelerometer_zz', event.acceleration.z*100);
+        updateFieldIfNotNull('Accelerometer_xx', posX);
+        updateFieldIfNotNull('Accelerometer_yy', posY);
+        updateFieldIfNotNull('Accelerometer_zz', posZ);
 
 
         updateFieldIfNotNull('Gyroscope_z', event.rotationRate.alpha);
@@ -109,6 +120,10 @@
             DeviceMotionEvent.requestPermission();
         }
 
+
+
+
+
         if (is_running){
             window.removeEventListener("devicemotion", handleMotion);
             window.removeEventListener("deviceorientation", handleOrientation);
@@ -117,6 +132,10 @@
             demo_button.classList.remove('btn-danger');
             is_running = false;
         }else{
+
+            posX = 0
+            posY = 0
+            posZ = 0
             window.addEventListener("devicemotion", handleMotion);
             window.addEventListener("deviceorientation", handleOrientation);
             document.getElementById("start_demo").innerHTML = "Stop demo";
