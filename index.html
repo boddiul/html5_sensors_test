@@ -31,9 +31,9 @@
 
         <h4>Accelerometer SHIFT</h4>
         <ul>
-            <li>X-axis ': <span id="Accelerometer_xx">0</span><span> m/s<sup>2</sup></span></li>
-            <li>Y-axis ': <span id="Accelerometer_yy">0</span><span> m/s<sup>2</sup></span></li>
-            <li>Z-axis ': <span id="Accelerometer_zz">0</span><span> m/s<sup>2</sup></span></li>
+            <li>X-axis ': <span id="Accelerometer_xx">0</span><span> m</span></li>
+            <li>Y-axis ': <span id="Accelerometer_yy">0</span><span> m</span></li>
+            <li>Z-axis ': <span id="Accelerometer_zz">0</span><span> m</span></li>
         </ul>
 
         <h4>Accelerometer including gravity</h4>
@@ -42,6 +42,14 @@
             <li>X-axis: <span id="Accelerometer_gx">0</span><span> m/s<sup>2</sup></span></li>
             <li>Y-axis: <span id="Accelerometer_gy">0</span><span> m/s<sup>2</sup></span></li>
             <li>Z-axis: <span id="Accelerometer_gz">0</span><span> m/s<sup>2</sup></span></li>
+        </ul>
+
+
+        <h4>Accelerometer grav SHIFT</h4>
+        <ul>
+            <li>X-axis ': <span id="Accelerometer_gxx">0</span><span> m</span></li>
+            <li>Y-axis ': <span id="Accelerometer_gyy">0</span><span> m</span></li>
+            <li>Z-axis ': <span id="Accelerometer_gzz">0</span><span> m</span></li>
         </ul>
 
         <h4>Gyroscope</h4>
@@ -59,6 +67,10 @@
     posX = 0
     posY = 0
     posZ = 0
+
+    posGX = 0
+    posGY = 0
+    posGZ = 0
 
     function handleOrientation(event) {
         updateFieldIfNotNull('Orientation_a', event.alpha);
@@ -94,6 +106,10 @@
         posY +=event.acceleration.y*d;
         posZ +=event.acceleration.z*d;
 
+        posGX +=event.accelerationIncludingGravity.x*d;
+        posGY +=event.accelerationIncludingGravity.y*d;
+        posGZ +=event.accelerationIncludingGravity.z*d;
+
 
         updateFieldIfNotNull('Accelerometer_i', event.interval, 2);
 
@@ -101,6 +117,9 @@
         updateFieldIfNotNull('Accelerometer_yy', posY);
         updateFieldIfNotNull('Accelerometer_zz', posZ);
 
+        updateFieldIfNotNull('Accelerometer_gxx', posGX);
+        updateFieldIfNotNull('Accelerometer_gyy', posGY);
+        updateFieldIfNotNull('Accelerometer_gzz', posGZ);
 
         updateFieldIfNotNull('Gyroscope_z', event.rotationRate.alpha);
         updateFieldIfNotNull('Gyroscope_x', event.rotationRate.beta);
@@ -137,6 +156,9 @@
             posX = 0
             posY = 0
             posZ = 0
+            posGX = 0
+            posGY = 0
+            posGZ = 0
             window.addEventListener("devicemotion", handleMotion);
             window.addEventListener("deviceorientation", handleOrientation);
             document.getElementById("start_demo").innerHTML = "Stop demo";
