@@ -85,11 +85,9 @@
 
         updateFieldIfNotNull('Accelerometer_i', event.interval, 2);
 
-
-
         updateFieldIfNotNull('Accelerometer_xx', event.acceleration.x*100);
         updateFieldIfNotNull('Accelerometer_yy', event.acceleration.y*100);
-        updateFieldIfNotNull('Accelerometer_zz', event.acceleration.z)*100;
+        updateFieldIfNotNull('Accelerometer_zz', event.acceleration.z*100);
 
 
         updateFieldIfNotNull('Gyroscope_z', event.rotationRate.alpha);
