@@ -27,6 +27,8 @@
             <li>Y-axis: <span id="Accelerometer_y">0</span><span> m/s<sup>2</sup></span></li>
             <li>Z-axis: <span id="Accelerometer_z">0</span><span> m/s<sup>2</sup></span></li>
             <li>Data Interval: <span id="Accelerometer_i">0</span><span> ms</span></li>
+            <li>My Interval: <span id="My_i">0</span><span> ms</span></li>
+
         </ul>
 
         <h4>Accelerometer SHIFT</h4>
@@ -64,7 +66,12 @@
 
 <script>
 
+
+    nowp=0
+    lastp=0
     posX = 0
+
+
     posY = 0
     posZ = 0
 
@@ -101,7 +108,14 @@
 
 
 
-        let d = (event.interval/1000*event.interval/1000)/2;
+        nowp = performance.now();
+        let realinterval = nowp-lastp;
+
+        lastp = nowp;
+
+
+
+        let d = (realinterval/1000*realinterval/1000)/2;
         posX +=event.acceleration.x*d;
         posY +=event.acceleration.y*d;
         posZ +=event.acceleration.z*d;
@@ -112,6 +126,9 @@
 
 
         updateFieldIfNotNull('Accelerometer_i', event.interval, 2);
+
+        updateFieldIfNotNull('My_i', realinterval, 2);
+
 
         updateFieldIfNotNull('Accelerometer_xx', posX);
         updateFieldIfNotNull('Accelerometer_yy', posY);
@@ -153,6 +170,10 @@
             is_running = false;
         }else{
 
+
+
+            nowp=0
+            lastp=performance.now()
             posX = 0
             posY = 0
             posZ = 0
