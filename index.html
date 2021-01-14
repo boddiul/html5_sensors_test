@@ -89,9 +89,10 @@
 
 
 
-        posX +=event.acceleration.x;
-        posY +=event.acceleration.y;
-        posZ +=event.acceleration.z;
+        let d = (event.interval/100*event.interval/100)/2;
+        posX +=event.acceleration.x*d;
+        posY +=event.acceleration.y*d;
+        posZ +=event.acceleration.z*d;
 
 
         updateFieldIfNotNull('Accelerometer_i', event.interval, 2);
