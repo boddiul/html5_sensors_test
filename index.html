@@ -31,6 +31,14 @@
 
         </ul>
 
+        <h4>Accelerometer SPEED</h4>
+        <ul>
+            <li>X-axis ': <span id="Accelerometer_spdx">0</span><span> m/s</span></li>
+            <li>Y-axis ': <span id="Accelerometer_spdy">0</span><span> m/s</span></li>
+            <li>Z-axis ': <span id="Accelerometer_spdz">0</span><span> m/s</span></li>
+        </ul>
+
+
         <h4>Accelerometer SHIFT</h4>
         <ul>
             <li>X-axis ': <span id="Accelerometer_xx">0</span><span> m</span></li>
@@ -144,6 +152,11 @@
         updateFieldIfNotNull('Accelerometer_xx', posX);
         updateFieldIfNotNull('Accelerometer_yy', posY);
         updateFieldIfNotNull('Accelerometer_zz', posZ);
+
+
+        updateFieldIfNotNull('Accelerometer_spdx', posX);
+        updateFieldIfNotNull('Accelerometer_spdy', posY);
+        updateFieldIfNotNull('Accelerometer_spdz', posZ);
 
         /*
         updateFieldIfNotNull('Accelerometer_gxx', posGX);
