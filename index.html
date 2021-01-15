@@ -126,10 +126,19 @@
         spdY+=event.acceleration.y*realinterval/1000
         spdZ+=event.acceleration.z*realinterval/1000
 
+        if (event.acceleration.x===0)
+            spdX = spdX/2;
+
+        if (event.acceleration.y===0)
+            spdY = spdY/2;
+
+
+        if (event.acceleration.z===0)
+            spdZ = spdZ/2;
 
         posX +=spdX*realinterval/1000;
         posY +=spdY*realinterval/1000;
-        posZ +=spdZ*realinterval/1000
+        posZ +=spdZ*realinterval/1000;
 
 
 /*
